@@ -1,0 +1,69 @@
+﻿  main.cpp
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(109): warning C4018: '<': signed/unsigned mismatch
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(168): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(177): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(194): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(207): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(211): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(215): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(223): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(227): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(230): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(238): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(242): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(245): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(253): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(257): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(260): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(275): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\wdexpress\vc\tools\msvc\14.16.27023\include\utility(172): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty1=float
+          ]
+  d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(55): note: see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+          with
+          [
+              _Other1=int,
+              _Other2=int
+          ]
+  d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(55): note: see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(_Other1 &&,_Other2 &&) noexcept' being compiled
+          with
+          [
+              _Other1=int,
+              _Other2=int
+          ]
+c:\program files (x86)\microsoft visual studio\2017\wdexpress\vc\tools\msvc\14.16.27023\include\utility(173): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+c:\program files (x86)\microsoft visual studio\2017\wdexpress\vc\tools\msvc\14.16.27023\include\utility(239): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty1=float
+          ]
+  d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(59): note: see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(std::pair<int,int> &&) noexcept' being compiled
+  d:\iit dh\lectures\sem vi\computer graphics\snake\assignsnake\snake\snake\main.cpp(59): note: see reference to function template instantiation 'std::pair<float,float>::pair<int,int,0>(std::pair<int,int> &&) noexcept' being compiled
+c:\program files (x86)\microsoft visual studio\2017\wdexpress\vc\tools\msvc\14.16.27023\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  Snake.vcxproj -> D:\IIT DH\Lectures\SEM VI\Computer Graphics\SNAKE\AssignSnake\Snake\Debug\Snake.exe
