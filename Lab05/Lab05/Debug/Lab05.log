@@ -1,0 +1,6 @@
+﻿  main.cpp
+d:\iit dh\lectures\sem vi\computer graphics\lab05\lab05\main.cpp(44): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\lab05\lab05\main.cpp(45): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\lab05\lab05\main.cpp(47): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\iit dh\lectures\sem vi\computer graphics\lab05\lab05\main.cpp(47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Lab05.vcxproj -> D:\IIT DH\Lectures\SEM VI\Computer Graphics\Lab05\Lab05\Debug\Lab05.exe
