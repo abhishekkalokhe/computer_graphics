@@ -14,7 +14,14 @@ int main()
         for(int j=0; j<10; j++)
         {
             File>> arr[i][j];
+            if (arr[i][j] == '0'){
+                cout<<' ';
+            }
+            else if (arr[i][j] == '1'){
+                cout<<'*';
+            }
         }
+        cout<<endl;
     }
     
 }
