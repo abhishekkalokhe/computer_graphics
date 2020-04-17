@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <chrono>
+#include <math.h>
 
 // Acknowldgement: 
 // This code is an adapted version of the original source code
@@ -16,7 +17,7 @@ void processInput(GLFWwindow *window);
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-const unsigned int N_CURVE_PTS = 3;  // change N_CURVE_PTS= 1001 for actual implementation
+const unsigned int N_CURVE_PTS = 1001;  // change N_CURVE_PTS= 1001 for actual implementation
 float controlPts[] = { -0.50f, 0.25f, 0.0f, -0.25f, 0.75f, 0.0f, 0.25f, 0.50f, 0.0f, 0.50, 0.00f, 0.0f };
 // Note that it is normalized coordinate space; ideally control polygon can come from user clicks.
 
@@ -30,46 +31,78 @@ const char *fragmentShaderSource = "#version 330 core\n"
 "out vec4 FragColor;\n"
 "void main()\n"
 "{\n"
-"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+"   FragColor = vec4(1.0f, 0.85f, 0.0f, 1.0f);\n"
 "}\n\0";
+
+
+
+
+//comment the content of other two functions (make them empty) to see the plot of that function.
+//Anyways all the three approaches give same curve.
+//But by default, getVertices_bez3Horner function plots the curve as it is called at last and modifies the vertices array.
 
 void getVertices_bez3DeCasteljau(unsigned int N_CURVE_PTS, float* vertices) {
 	// Enter deCasteljau code here in place of hardcoded values with N_CURVE_PTS 1001 or greater
-	vertices[0] = -0.5f;   //vertex#1 x value
-	vertices[1] = -0.5f;   //vertex#1 y value
-	vertices[2] = 0.0f;    //vertex#1 z value
-	vertices[3] = 0.5f;    //vertex#2 x value
-	vertices[4] = -0.5f;   //vertex#2 y value
-	vertices[5] = 0.0f;    //vertex#2 z value  ... and so on
-	vertices[6] = 0.0f;
-	vertices[7] = 0.5f;
-	vertices[8] = 0.0f;
+
+	for (int j = 0; j <= 3000; j = j + 3)
+	{
+		float i = j;
+		float x = pow(1.0f - (i / 3000.0f), 3.0f)*controlPts[0] + 3.0f * (i / 3000.0f)*pow(1.0f - (i / 3000.0f), 2.0f)*controlPts[3] + 3.0f * pow(i / 3000.0f, 2.0f)*(1.0f - (i / 3000.0f))*controlPts[6] + pow(i / 3000.0f, 3.0f)*controlPts[9];
+		float y = pow(1.0f - (i / 3000.0f), 3.0f)*controlPts[1] + 3.0f * (i / 3000.0f)*pow(1.0f - (i / 3000.0f), 2.0f)*controlPts[4] + 3.0f * pow(i / 3000.0f, 2.0f)*(1.0f - (i / 3000.0f))*controlPts[7] + pow(i / 3000.0f, 3.0f)*controlPts[10];
+		float z = pow(1.0f - (i / 3000.0f), 3.0f)*controlPts[2] + 3.0f * (i / 3000.0f)*pow(1.0f - (i / 3000.0f), 2.0f)*controlPts[5] + 3.0f * pow(i / 3000.0f, 2.0f)*(1.0f - (i / 3000.0f))*controlPts[8] + pow(i / 3000.0f, 3.0f)*controlPts[11];
+		vertices[j] = x;
+		vertices[j + 1] = y;
+		vertices[j + 2] = z;
+
+
+
+		//std::cout<<vertices[j]<<std::endl;
+		//std::cout<<float(x)<<std::endl;
+		//std::cout << vertices[j] << " " << vertices[j + 1] << " " << vertices[j + 2]<<std::endl;
+	}
 
 }
 void getVertices_bez3Mat(unsigned int N_CURVE_PTS, float* vertices) {
 	// Enter debez3Mat code here in place of hardcoded values with N_CURVE_PTS 1001 or greater
-	vertices[0] = -0.5f;   //vertex#1 x value
-	vertices[1] = -0.5f;   //vertex#1 y value
-	vertices[2] = 0.0f;    //vertex#1 z value
-	vertices[3] = 0.5f;    //vertex#2 x value
-	vertices[4] = -0.5f;   //vertex#2 y value
-	vertices[5] = 0.0f;    //vertex#2 z value  ... and so on
-	vertices[6] = 0.0f;
-	vertices[7] = 0.5f;
-	vertices[8] = 0.0f;
+
+	float matrix[4][4] = { {1, -3, 3, -1}, {0, 3, -6, 3}, {0, 0, 3, -3}, {0, 0, 0, 1} };
+
+
+	int m = 0;
+	float first2[] = { 0, 0, 0,0,0,0,0,0,0,0,0,0 };
+	for (int j = 0; j <= 9; j = j + 3)
+	{
+		first2[j] = controlPts[0] * matrix[0][m] + controlPts[3] * matrix[1][m] + controlPts[6] * matrix[2][m] + controlPts[9] * matrix[3][m];
+		first2[j + 1] = controlPts[1] * matrix[0][m] + controlPts[4] * matrix[1][m] + controlPts[7] * matrix[2][m] + controlPts[10] * matrix[3][m];
+		first2[j + 2] = controlPts[2] * matrix[0][m] + controlPts[5] * matrix[1][m] + controlPts[8] * matrix[2][m] + controlPts[11] * matrix[3][m];
+		m = m + 1;
+
+		//std::cout << first2[j] << " " << first2[j + 1] << " " << first2[j + 2]<<"Hello"<<std::endl;
+	}
+	for (int i = 0; i <= 3000; i = i + 3)
+	{
+
+		float param[4] = { 1.00, i / 3000.00, pow(i / 3000.00,2.00), pow(i / 3000.00,3.00) };
+		vertices[i] = first2[0] * param[0] + first2[3] * param[1] + first2[6] * param[2] + first2[9] * param[3];
+		vertices[i + 1] = first2[1] * param[0] + first2[4] * param[1] + first2[7] * param[2] + first2[10] * param[3];
+		vertices[i + 2] = first2[2] * param[0] + first2[5] * param[1] + first2[8] * param[2] + first2[11] * param[3];
+
+
+		//std::cout << param[3]<<std::endl;
+		//std::cout <<i<< vertices[i] << " " << vertices[i + 1] << " " << vertices[i + 2] << std::endl;
+	}
+
 
 }
 void getVertices_bez3Horner(unsigned int N_CURVE_PTS, float* vertices) {
 	// Enter deHorner code here in place of hardcoded values with N_CURVE_PTS 1001 or greater
-	vertices[0] = -0.5f;   //vertex#1 x value
-	vertices[1] = -0.5f;   //vertex#1 y value
-	vertices[2] = 0.0f;    //vertex#1 z value
-	vertices[3] = 0.5f;    //vertex#2 x value
-	vertices[4] = -0.5f;   //vertex#2 y value
-	vertices[5] = 0.0f;    //vertex#2 z value  ... and so on
-	vertices[6] = 0.0f;
-	vertices[7] = 0.5f;
-	vertices[8] = 0.0f;
+
+	for (int i = 0; i <= 3000; i = i + 3)
+	{
+		vertices[i] = ((1.00*(1.00 - (i / 3000.00))*controlPts[0] + 3.00*(i / 3000.00)*controlPts[3])*(1 - (i / 3000.00)) + 3.00*pow((i / 3000.00), 2.00)*controlPts[6])*(1 - (i / 3000.00)) + 1 * pow((i / 3000.00), 3)*controlPts[9];
+		vertices[i + 1] = ((1.00*(1.00 - (i / 3000.00))*controlPts[1] + 3.00*(i / 3000.00)*controlPts[4])*(1 - (i / 3000.00)) + 3.00*pow((i / 3000.00), 2.00)*controlPts[7])*(1 - (i / 3000.00)) + 1 * pow((i / 3000.00), 3)*controlPts[10];
+		vertices[i + 2] = ((1.00*(1.00 - (i / 3000.00))*controlPts[2] + 3.00*(i / 3000.00)*controlPts[5])*(1 - (i / 3000.00)) + 3.00*pow((i / 3000.00), 2.00)*controlPts[8])*(1 - (i / 3000.00)) + 1 * pow((i / 3000.00), 3)*controlPts[11];
+	}
 
 }
 
@@ -163,6 +196,8 @@ int main()
 
 	auto start = high_resolution_clock::now();  //Note need C++11 and #include <chrono> using namespace std::chrono
 
+	//Comment the other function calls to see the curve drawn by one function
+	
 	getVertices_bez3DeCasteljau(N_CURVE_PTS, vertices);
 
 	auto stop_1 = high_resolution_clock::now();
@@ -187,9 +222,11 @@ int main()
 	//std::cout << vertices[0] << " " << vertices[1] << " " << vertices[2] << "\n" << vertices[3] << " " << vertices[4] << " " << vertices[5] << " " << std::endl;
 
 
-	unsigned int VBO, VAO;
+	unsigned int VBO, VAO, VBL, VAL;
 	glGenVertexArrays(1, &VAO);
+	glGenVertexArrays(1, &VAL);
 	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &VBL);
 	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
 	glBindVertexArray(VAO);
 
@@ -206,8 +243,26 @@ int main()
 	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
 	glBindVertexArray(0);
 
+	//-------------------------------------------------------------
+	glBindVertexArray(VAL);
 
-	// uncomment this call to draw in wireframe polygons.
+	glBindBuffer(GL_ARRAY_BUFFER, VBL);
+	glBufferData(GL_ARRAY_BUFFER, chunkSzBytes, controlPts, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+	glBindVertexArray(0);
+
+
+	//------------------------------------------------------------------
+
+	//uncomment this call to draw in wireframe polygons.
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	// render loop
@@ -220,14 +275,20 @@ int main()
 
 		// render
 		// ------
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+		glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// draw our first triangle
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-		glDrawArrays(GL_LINE_STRIP, 0, 3);
-		// glBindVertexArray(0); // no need to unbind it every time
+		glDrawArrays(GL_LINE_STRIP, 0, 1001);
+		glBindVertexArray(0); // no need to unbind it every time
+		//__________________________________________________________________________
+		glBindVertexArray(VAL);
+		glDrawArrays(GL_LINE_STRIP, 0, 4); // x axis
+		glBindVertexArray(0);
+
+		//____________________________________________________________________-
 
 		// glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
 		// -------------------------------------------------------------------------------

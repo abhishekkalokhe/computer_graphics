@@ -1,2 +1,8 @@
 ﻿  main.cpp
+d:\iit dh\lectures\sem vi\computer graphics\github\computer_graphics\lab06\main.cpp(49): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\github\computer_graphics\lab06\main.cpp(85): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+d:\iit dh\lectures\sem vi\computer graphics\github\computer_graphics\lab06\main.cpp(85): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\github\computer_graphics\lab06\main.cpp(102): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\github\computer_graphics\lab06\main.cpp(103): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\iit dh\lectures\sem vi\computer graphics\github\computer_graphics\lab06\main.cpp(104): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Lab06.vcxproj -> D:\IIT DH\Lectures\SEM VI\Computer Graphics\GitHub\computer_graphics\Lab06\Debug\Lab06.exe
